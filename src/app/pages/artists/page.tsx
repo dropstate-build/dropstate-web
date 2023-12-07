@@ -69,8 +69,8 @@ function ArtistPage() {
                 <div className='w-full  flex flex-row gap-[40px] jusity-self-start justify-start items-center  '>
                     {/* cards */}
                     {
-                        cards.map((card) => (
-                            <ProductCard ProductCard={card} />
+                        cards.map((card,index) => (
+                            <ProductCard key={index} ProductCard={card} />
                         ))}
                 </div>
 

@@ -1,113 +1,143 @@
+'use client'
 import Image from 'next/image'
+import Link from 'next/link'
+import { RiVerifiedBadgeFill } from 'react-icons/ri'
+import { GoArrowUpRight } from "react-icons/go";
+import React, { useEffect } from 'react';
+import Themes from './components/themes';
+import Drops from './components/drops';
+import TopArtists from './components/topArtists';
+import ArtistFooter from './components/artistFooter';
+import NavBar from './components/navbar';
+import UserOpt from './components/userOptions';
+import Brand from './components/brand';
+import Banner from './components/banner';
 
 export default function Home() {
+  const trendingDrops = [
+    { img: "https://www.urbanmonkey.com/cdn/shop/products/daily-reminder-1_13c5b7b8-a23b-46e5-802e-f42ae71cfb96_1024x.jpg?v=1665474801" },
+    { img: "https://assets.bonkerscorner.com/uploads/2021/08/07164738/Look-3-2179.jpg" },
+    { img: "https://m.media-amazon.com/images/I/614l7-eEh3L._AC_UY1100_.jpg" },
+
+  ]
+  const themes = [
+    {
+      img: 'https://c4.wallpaperflare.com/wallpaper/879/54/385/anime-boys-neon-hd-wallpaper-preview.jpg',
+      logo: 'https://www.urbanmonkey.com/cdn/shop/products/daily-reminder-1_13c5b7b8-a23b-46e5-802e-f42ae71cfb96_1024x.jpg?v=1665474801',
+      header: 'NEED FOR SPEED',
+      body: 'Unleash high-octane fashion that accelerates your look to the finish line'
+    },
+    {
+      img: 'https://images.hdqwalls.com/download/spider-man-miles-morales-artwork-4k-nr-2048x1152.jpg',
+      logo: 'https://www.urbanmonkey.com/cdn/shop/products/daily-reminder-1_13c5b7b8-a23b-46e5-802e-f42ae71cfb96_1024x.jpg?v=1665474801',
+      header: 'NEED FOR SPEED',
+      body: 'Unleash high-octane fashion that accelerates your look to the finish line'
+    },
+    {
+      img: 'https://wallpapers.com/images/hd/rocket-league-hd-neon-car-bmwm76bljegylf2e.jpg',
+      logo: 'https://www.urbanmonkey.com/cdn/shop/products/daily-reminder-1_13c5b7b8-a23b-46e5-802e-f42ae71cfb96_1024x.jpg?v=1665474801',
+      header: 'NEED FOR SPEED',
+      body: 'Unleash high-octane fashion that accelerates your look to the finish line'
+    },
+    {
+      img: 'https://static1.srcdn.com/wordpress/wp-content/uploads/2019/09/Batman-Damned-Comic-Interview.jpg',
+      logo: 'https://www.urbanmonkey.com/cdn/shop/products/daily-reminder-1_13c5b7b8-a23b-46e5-802e-f42ae71cfb96_1024x.jpg?v=1665474801',
+      header: 'NEED FOR SPEED',
+      body: 'Unleash high-octane fashion that accelerates your look to the finish line'
+    },
+    {
+      img: 'https://images.cointelegraph.com/cdn-cgi/image/format=auto,onerror=redirect,quality=90,width=1434/https://s3.cointelegraph.com/uploads/2022-01/34a3c220-19b7-45d4-9c80-8c2bc8006486.jpg',
+      logo: 'https://www.urbanmonkey.com/cdn/shop/products/daily-reminder-1_13c5b7b8-a23b-46e5-802e-f42ae71cfb96_1024x.jpg?v=1665474801',
+      header: 'NEED FOR SPEED',
+      body: 'Unleash high-octane fashion that accelerates your look to the finish line'
+    },
+    {
+      img: 'https://c4.wallpaperflare.com/wallpaper/776/58/423/robot-mech-animals-computer-parts-nft-cgi-hd-wallpaper-preview.jpg',
+      logo: 'https://www.urbanmonkey.com/cdn/shop/products/daily-reminder-1_13c5b7b8-a23b-46e5-802e-f42ae71cfb96_1024x.jpg?v=1665474801',
+      header: 'NEED FOR SPEED',
+      body: 'Unleash high-octane fashion that accelerates your look to the finish line'
+    },
+
+  ]
+  const ArtistCards = [
+    {
+      name: 'ElonMusk',
+      pitch: 'Official Riot Games store on dropstate where pixels meet passion. Explore exclusive gaming gear inspired by your favorite titles.',
+      image: 'https://cdn.midjourney.com/42a84bda-1597-428a-894c-f005a21632e5/grid_0_640_N.webp',
+      link: 'https://www.google.com/'
+    },
+    {
+      name: 'Budweiser',
+      pitch: 'Official Riot Games store on dropstate where pixels meet passion. Explore exclusive gaming gear inspired by your favorite titles.',
+      image: 'https://eazywagon.com/cdn/shop/products/EW138lowres_69f2fd10-150f-4100-ac9c-c8062d3363b2_800x.jpg?v=1667377215',
+      link: 'https://www.google.com/'
+    },
+    {
+      name: 'Riot Games',
+      pitch: 'Official Riot Games store on dropstate where pixels meet passion. Explore exclusive gaming gear inspired by your favorite titles.',
+      image: 'https://images2.minutemediacdn.com/image/fetch/w_736,h_485,c_fill,g_auto,f_auto/https%3A%2F%2Fblogoflegends.com%2Ffiles%2F2019%2F10%2FCopy-of-Ekko-1-850x560.jpg',
+      link: 'https://www.google.com/'
+    },
+    {
+      name: 'DudePerfect',
+      pitch: 'Official Riot Games store on dropstate where pixels meet passion. Explore exclusive gaming gear inspired by your favorite titles.',
+      image: 'https://i.pinimg.com/originals/c8/fb/36/c8fb36829a5ffc0d5768c7bd16c81f55.jpg',
+      link: 'https://www.google.com/'
+    },
+    {
+      name: 'BoredApeYatchClub',
+      pitch: 'Official Riot Games store on dropstate where pixels meet passion. Explore exclusive gaming gear inspired by your favorite titles.',
+      image: 'https://images.t3n.de/news/wp-content/uploads/2022/04/bored-ape-otherside.jpg?class=structuredData-small',
+      link: 'https://www.google.com/'
+    }
+  ]
+  //   useEffect(() => {
+  //     const script= document.querySelector(".card-selector")?.cloneNode(true)
+  //     const section=document.querySelector(".section")
+  //     script?section?.appendChild(script):null
+  // return ()=>{
+  //   script?section?.removeChild(script):null
+  // }
+
+  // }, [])
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <main className="flex min-h-screen flex-col items-start  bg-white ">
+      {/* banner  */}
+      <Banner />
+      {/* brandName and userOptions */}
+      <div className='flex flex-row h-[65px] justify-between w-full  items-start text-black font-Plus_Jakarta_Sans mb-[37px]'>
+        {/* brandName and sometext */}
+        <Brand />
+        {/* userOptions */}
+        <UserOpt />
+
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      {/* navbar list */}
+      <div className='ml-[40px]'>
+        <NavBar />
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      {/* topArtists */}
+      <div className='w-full flex flex-col mt-[102px]'>
+        {/* artists */}
+        <TopArtists topArtists={ArtistCards} />
       </div>
+      {/* trendingDrops*/}
+      <div className='mt-[121px] w-full flex  '>
+        {/* drops */}
+        <Drops tdrops={trendingDrops} />
+      </div>
+      {/* themes */}
+      <div className='w-full  mt-[200px]'>
+        <Themes themes={themes} />
+
+      </div>
+      {/* hook for artists */}
+      <div className='w-full relative  flex justify-center items-center  mt-[1822px] bg-black h-[373px] '>
+        {/* artists footer */}
+        <ArtistFooter />
+      </div>
+      {/* general footer */}
+
     </main>
   )
 }
